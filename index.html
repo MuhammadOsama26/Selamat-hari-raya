@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Moon Sighting 🌙❤️</title>
+
+<style>
+/* Base */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+}
+
+/* Star layers (fixed for mobile stability) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    animation: moveStars 120s linear infinite;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(255,100,200,0.15), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(100,150,255,0.15), transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes moveStars {
+    from { transform: translate(0,0); }
+    to { transform: translate(-500px,-500px); }
+}
+
+/* Cards */
+.card {
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* First card */
+#mainCard {
+    max-width: 420px;
+    text-align: center;
+}
+
+/* Second card */
+#messageCard {
+    max-width: 750px;
+    display: none;
+    text-align: left;
+    line-height: 1.8;
+    font-size: 16px;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+/* Headings */
+h2 {
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+/* Buttons */
+.btn {
+    padding: 14px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.moon { background: #f5f7fa; color: black; }
+.queen { background: #ff4e91; color: white; }
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Popups */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.9);
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    width: 85%;
+    max-width: 300px;
+    z-index: 9999;
+    text-align: center;
+}
+
+.popup button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: #ff4e91;
+    color: white;
+}
+
+/* Mobile improvements */
+@media (max-width: 600px) {
+    .btn {
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    #messageCard {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FIRST CARD -->
+<div class="card" id="mainCard">
+    <h2>Reach for the moon, my love 🌙</h2>
+
+    <button class="btn moon" onclick="wrongChoice()">🌙 Moon</button>
+    <button class="btn queen" onclick="rightChoice()">My Queen ❤️</button>
+</div>
+
+<!-- SECOND CARD -->
+<div class="card" id="messageCard">
+    <h2>Happy Moon Sighting, My Moon 🌙❤️</h2>
+    <p> Meri jaan, I told you na... when the moon rises tonight and everyone in Malaysia will be out there looking at the sky, searching for that one beautiful glimpse of the moon... I won’t be looking at it the same way they will... because my love... while they’re searching for the moon, I’ll be searching for you... maybe from far away, maybe through memories, maybe through the way your name sits quietly in my heart... but I’ll still be looking at you, REALLY! Tonight feels incomplete without you here, like the sky has a moon... but I don’t, and it’s funny, isn’t it? The whole world celebrates when the moon appears... but I already found mine the day I found you, you are my moon, my light, my calm in every chaos, my soft place in this loud world, so tonight... while everyone says Selamat Hari Raya, I’m saying it to the one who makes every night feel special. </br> </br>
+Blessed Moon Night, my love... come back soon, because distances are starting to feel jealous of how much I love you ❤️🌙
+    </p>
+</div>
+
+<!-- POPUPS -->
+<div class="popup" id="wrongPopup">
+    <h3>WRONG SELECTION BABE ❌</h3>
+    <button onclick="closeWrong()">Close</button>
+</div>
+
+<div class="popup" id="rightPopup">
+    <p> You should know that... </br></br>
+You are my moon that lights my darkest nights, my sun that warms my soul with every ray, my star that guides me when I feel lost, my galaxy where all my dreams live, and my whole wide world that makes life worth every heartbeat ✨
+    </p>
+    <button onclick="goNext()">Proceed my moon 🌙</button>
+</div>
+
+<!-- AUDIO -->
+<audio id="mySong" loop>
+    <source src="Mahiye Jinna Sohna.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function wrongChoice() {
+    document.getElementById("wrongPopup").style.display = "block";
+}
+
+function closeWrong() {
+    document.getElementById("wrongPopup").style.display = "none";
+}
+
+function rightChoice() {
+    // Play the song
+    const song = document.getElementById("mySong");
+    song.volume = 0.4;
+    song.play();
+
+    document.getElementById("rightPopup").style.display = "block";
+}
+
+function goNext() {
+    document.getElementById("mainCard").style.display = "none";
+    document.getElementById("rightPopup").style.display = "none";
+    document.getElementById("messageCard").style.display = "block";
+}
+</script>
+
+</body>
+</html>
